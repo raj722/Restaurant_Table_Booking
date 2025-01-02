@@ -3,15 +3,21 @@ import { Link } from "react-router-dom";
 
 function Navbar() {
   return (
-    <nav className="bg-gray-800 p-4 text-white flex items-center justify-around">
-      {/* Left side: Logo */}
+    <nav className="bg-gray-800 p-4 text-white flex items-center justify-between">
+      {/* Left side: Logo (Link to Landing Page) */}
       <div className="flex items-center">
-        <img src="/path-to-logo.png" alt="Logo" className="h-10 w-10 mr-4" />
+        <Link to="/">
+          <img 
+            src="/images/logo.png" 
+            alt="Logo" 
+            className="h-12 w-12 object-contain mr-4" 
+          />
+        </Link>
       </div>
 
       {/* Center: Navigation Links */}
-      <ul className="flex space-x-6 text-center">
-        <li><Link to="/" className="hover:text-gray-300">Home</Link></li>
+      <ul className="flex flex-grow justify-center space-x-6 text-center">
+        <li><Link to="/home" className="hover:text-gray-300">Home</Link></li>
         <li><Link to="/booking" className="hover:text-gray-300">Booking Table</Link></li>
         <li><Link to="/about" className="hover:text-gray-300">About Us</Link></li>
         <li><Link to="/contact" className="hover:text-gray-300">Contact</Link></li>
@@ -28,4 +34,3 @@ function Navbar() {
 }
 
 export default Navbar;
-    

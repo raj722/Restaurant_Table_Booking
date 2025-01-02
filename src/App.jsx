@@ -6,22 +6,27 @@ import BookingPage from "./pages/BookingPage";
 import AboutPage from "./pages/AboutPage";
 import ContactPage from "./pages/ContactPage";
 import GalleryPage from "./pages/GalleryPage";
-import LoginPage from "./pages/LoginPage"; 
+import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
 import Footer from "./components/Footer";
+import LandingPage from "./pages/LandingPage";
+
 function App() {
+  
   return (
     <Router>
-      <Navbar />
+      <Navbar/>
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/home" element={<HomePage />} />
         <Route path="/booking" element={<BookingPage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/gallery" element={<GalleryPage />} />
-        <Route path="/login" element={<LoginPage />} /> 
+        <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
       </Routes>
+
       <Footer />
     </Router>
   );
