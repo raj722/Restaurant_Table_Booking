@@ -1,18 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
 
 function LoginPage() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    // Call backend API to authenticate user
+    // Example:
+    // fetch('/api/login', { method: 'POST', body: JSON.stringify({ email, password }) })
+    alert("Login successful!");
+  };
+
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div className="w-full max-w-md p-8 bg-white rounded-lg shadow-md">
+    <div 
+      className="flex items-center justify-center min-h-screen bg-cover bg-center" 
+      style={{ backgroundImage: "url('/images/background.png')" }}
+    >
+      <div className="w-full max-w-md p-8 bg-gray-300 rounded-lg shadow-md">
         <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">Sign In</h2>
-        <form className="space-y-4">
+        <form className="space-y-4" onSubmit={handleLogin}>
           <div>
             <label htmlFor="email" className="block text-gray-600">Email</label>
             <input
               type="email"
               id="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               placeholder="username@example.com"
               className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+              required
             />
           </div>
           <div>
@@ -20,8 +37,11 @@ function LoginPage() {
             <input
               type="password"
               id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               placeholder="Enter your password"
               className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+              required
             />
           </div>
           <button
@@ -36,13 +56,16 @@ function LoginPage() {
             Forgot Password?
           </a>
         </div>
-        <div className="mt-6">
-          <button className="w-full py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 mb-2">
-            Sign in with Google
-          </button>
-          <button className="w-full py-2 bg-blue-700 text-white rounded-lg hover:bg-blue-800">
-            Sign in with Facebook
-          </button>
+        <div className="mt-6 text-center">
+          <p className="text-sm text-gray-600">
+            Don’t have an account? 
+            <button 
+              className="text-blue-500 hover:underline ml-1" 
+              onClick={() => window.location.href = "/signup"}
+            >
+              Sign Up
+            </button>
+          </p>
         </div>
       </div>
     </div>
