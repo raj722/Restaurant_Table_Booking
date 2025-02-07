@@ -1,18 +1,40 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom"; // Import useNavigate for redirection
+import { useNavigate, Link } from "react-router-dom";
 
 function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate(); // Hook to navigate to different routes
+  const [loading, setLoading] = useState(false); 
+  const navigate = useNavigate();
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    // Simulate a successful login (replace with backend logic)
-    localStorage.setItem("user", JSON.stringify({ email })); // Save user to localStorage
+    setLoading(true); 
 
-    alert("Login successful!");
-    navigate("/profile"); // Redirect to ProfilePage after login
+    try {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        localStorage.setItem("token", data.token); 
+        alert("Login successful!");
+        navigate("/profile"); 
+      } else {
+        alert("Invalid credentials. Please try again.");
+      }
+    } catch (error) {
+      console.error("Login Error:", error);
+      alert("Something went wrong. Please try again.");
+    }
+
+    setLoading(false); 
   };
 
   return (
@@ -46,25 +68,23 @@ function LoginPage() {
           </div>
           <button
             type="submit"
-            className="w-full py-2 text-white bg-blue-500 rounded-lg hover:bg-blue-600"
+            className={`w-full py-2 text-white rounded-lg ${loading ? "bg-gray-400" : "bg-blue-500 hover:bg-blue-600"}`}
+            disabled={loading}
           >
-            Sign In
+            {loading ? "Signing in..." : "Sign In"}
           </button>
         </form>
         <div className="flex items-center justify-between mt-4">
-          <a href="/forgot-password" className="text-sm text-blue-500 hover:underline">
+          <Link to="/forgot-password" className="text-sm text-blue-500 hover:underline">
             Forgot Password?
-          </a>
+          </Link>
         </div>
         <div className="mt-6 text-center">
           <p className="text-sm text-gray-600">
             Don’t have an account? 
-            <button
-              className="ml-1 text-blue-500 hover:underline"
-              onClick={() => window.location.href = "/signup"}
-            >
+            <Link to="/signup" className="ml-1 text-blue-500 hover:underline">
               Sign Up
-            </button>
+            </Link>
           </p>
         </div>
       </div>
