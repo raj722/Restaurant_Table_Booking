@@ -15,7 +15,7 @@ const featuredRestaurants = [
     price: "NRS",
     cuisine: "Tibetan",
     location: "Old-Baneshwor",
-    image: "/images/chipsy.webp",
+    image: "/images/chipsy.png",
   },
   {
     id: "2",
@@ -25,7 +25,7 @@ const featuredRestaurants = [
     price: "NRS",
     cuisine: "Nepali",
     location: "Boudha",
-    image: "/images/hyatt.webp",
+    image: "/images/hyatt.png",
   },
   {
     id: "3",
@@ -35,7 +35,7 @@ const featuredRestaurants = [
     price: "NRS",
     cuisine: "Nepali",
     location: "Thamel",
-    image: "/images/Everest_dine.webp",
+    image: "/images/Everest_dine.png",
   },
   {
     id: "4",
@@ -45,7 +45,7 @@ const featuredRestaurants = [
     price: "NRS",
     cuisine: "Fusion",
     location: "Lazimpat",
-    image: "/images/durbar_palace.webp",
+    image: "/images/durbar_palace.png",
   },
 ];
 
@@ -92,9 +92,9 @@ const LandingPage = () => {
       {/* Welcome Section with Image Grid */}
       <section className="relative min-h-screen">
         <div className="absolute inset-0 grid grid-cols-3 gap-0">
-          <div className="bg-[url('/images/party_1.webp')] bg-cover bg-center h-full" />
-          <div className="bg-[url('/images/party_2.webp')] bg-cover bg-center h-full" />
-          <div className="bg-[url('/images/party_3.webp')] bg-cover bg-center h-full" />
+          <div className="bg-[url('/images/party_1.jpg')] bg-cover bg-center h-full" />
+          <div className="bg-[url('/images/party_2.png')] bg-cover bg-center h-full" />
+          <div className="bg-[url('/images/party_3.jpg')] bg-cover bg-center h-full" />
         </div>
 
         <div className="absolute inset-0 bg-black/50" />
@@ -167,7 +167,7 @@ const LandingPage = () => {
       </Element>
 
       {/* About Us Section from the second version */}
-      <section id="about-us" className="py-16 bg-gray-500">
+      <section id="about-us" className="py-16 bg-gray-100">
         <h2 className="mb-8 text-3xl font-semibold text-center">About Us</h2>
         <div className="container px-6 mx-auto">
           <div className="grid items-center grid-cols-1 gap-8 md:grid-cols-3">
@@ -181,7 +181,7 @@ const LandingPage = () => {
               </Link>
             </div>
             <div className="text-center md:col-span-2 md:text-left">
-              <p className="text-lg leading-relaxed text-gray-900">
+              <p className="text-lg leading-relaxed text-gray-700">
                 We are passionate about bringing people together through the love of food.
                 Our goal is to provide the easiest and most enjoyable restaurant booking experience.
                 Whether you're looking for a casual meal or a fine dining experience, we've got you covered.

@@ -15,7 +15,7 @@ const featuredRestaurants = [
     price: "NRS",
     cuisine: "Tibetan",
     location: "Old-Baneshwor",
-    image: "/images/chipsy.webp",
+    image: "/images/chipsy.png",
   },
   {
     id: "2",
@@ -25,7 +25,7 @@ const featuredRestaurants = [
     price: "NRS",
     cuisine: "Nepali",
     location: "Boudha",
-    image: "/images/hyatt.webp",
+    image: "/images/hyatt.png",
   },
   {
     id: "3",
@@ -35,7 +35,7 @@ const featuredRestaurants = [
     price: "NRS",
     cuisine: "Nepali",
     location: "Thamel",
-    image: "/images/Everest_dine.webp",
+    image: "/images/Everest_dine.png",
   },
   {
     id: "4",
@@ -45,7 +45,7 @@ const featuredRestaurants = [
     price: "NRS",
     cuisine: "Fusion",
     location: "Lazimpat",
-    image: "/images/durbar_palace.webp",
+    image: "/images/durbar_palace.png",
   },
 ];
 

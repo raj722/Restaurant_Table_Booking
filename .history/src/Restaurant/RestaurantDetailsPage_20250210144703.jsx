@@ -16,7 +16,14 @@ const RestaurantDetailsPage = () => {
   const [loading, setLoading] = useState(false);
   const [notification, setNotification] = useState(null);
 
-  // Removed login check
+  // Check if the user is logged in
+  const isLoggedIn = localStorage.getItem("userToken");  
+
+  useEffect(() => {
+    if (!isLoggedIn) {
+      navigate("/login");  
+    }
+  }, [isLoggedIn, navigate]);
 
   const restaurants = [
     {

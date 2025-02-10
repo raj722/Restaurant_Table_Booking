@@ -47,6 +47,7 @@ function Navbar() {
         <li><Link to="/about" className="hover:text-gray-300">About Us</Link></li>
         <li><Link to="/contact" className="hover:text-gray-300">Contact</Link></li>
         <li><Link to="/restaurant" className="hover:text-gray-300">Restaurant Page</Link></li>
+        <li><Link to="/restaurant/:id" className="hover:text-gray-300">Restaurant DetailsPage</Link></li>
 
         {/* Show Restaurant link for restaurant owners */}
         {/* {role === "RestaurantUser" && (

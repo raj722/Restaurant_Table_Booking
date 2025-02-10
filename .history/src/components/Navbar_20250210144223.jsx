@@ -46,26 +46,26 @@ function Navbar() {
         <li><Link to="/booking" className="hover:text-gray-300">Booking Table</Link></li>
         <li><Link to="/about" className="hover:text-gray-300">About Us</Link></li>
         <li><Link to="/contact" className="hover:text-gray-300">Contact</Link></li>
-        <li><Link to="/restaurant" className="hover:text-gray-300">Restaurant Page</Link></li>
+        <li><Link to={`/restaurant/1`} className="hover:text-gray-300">Restaurant Details</Link></li>
 
-        {/* Show Restaurant link for restaurant owners */}
-        {/* {role === "RestaurantUser" && (
-          <li><Link to="/restaurant" className="hover:text-gray-300">Restaurant</Link></li>
-        )} */}
+        {/* Show Restaurant link for restaurant owners
+      //   {role === "RestaurantUser" && (
+      //     <li><Link to="/restaurant" className="hover:text-gray-300">Restaurant</Link></li>
+      //   )}
 
-        {/* Show Admin link for admins */}
-        {/* {role === "admin" && (
-          <li><Link to="/admin" className="hover:text-gray-300">Admin</Link></li>
-        )} */}
+      //   {/* Show Admin link for admins */}
+      //   {role === "admin" && (
+      //     <li><Link to="/admin" className="hover:text-gray-300">Admin</Link></li>
+      //   )}
 
-        {/* Show Restaurant Details link for Customers */}
-        {/* {role === "CustomerUser" && (
-          <li> */}
-            {/* <Link to={`/restaurant/1`} className="hover:text-gray-300">Restaurant Details</Link> */}
-            {/* Replace '1' with the actual restaurant ID dynamically if needed */}
-          {/* </li>
-        )} */}
-      </ul>
+      //   {/* Show Restaurant Details link for Customers */}
+      //   {role === "CustomerUser" && (
+      //     <li>
+      //       <Link to={`/restaurant/1`} className="hover:text-gray-300">Restaurant Details</Link>
+      //       {/* Replace '1' with the actual restaurant ID dynamically if needed */}
+      //     </li>
+      //   )}
+      // </ul> */}
 
       {/* Authentication Links */}
       <div className="flex items-center space-x-4">
