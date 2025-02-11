@@ -42,6 +42,7 @@ function Navbar() {
       <ul className="flex justify-center flex-grow space-x-6 text-center">
         {/* Home Link */}
         <li><Link to="/" className="hover:text-gray-300">Home</Link></li>
+        
         <li><Link to="/booking" className="hover:text-gray-300">Booking Table</Link></li>
         <li><Link to="/about" className="hover:text-gray-300">About Us</Link></li>
         <li><Link to="/contact" className="hover:text-gray-300">Contact</Link></li>

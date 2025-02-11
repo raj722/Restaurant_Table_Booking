@@ -4,18 +4,19 @@ import { Star, Clock, Phone, Users, Calendar, MapPin, ChevronLeft, ChevronRight 
 
 const RestaurantDetailsPage = () => {
   const { id } = useParams();
-  const navigate = useNavigate();
+  const navigate = useNavigate();  
   const [selectedImage, setSelectedImage] = useState(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [reservationData, setReservationData] = useState({
     date: "",
     time: "",
     guests: 1,
-    specialRequests: "",
+    specialRequests: ""
   });
   const [loading, setLoading] = useState(false);
   const [notification, setNotification] = useState(null);
-  const [showPopup, setShowPopup] = useState(false);
+
+  // Removed login check
 
   const restaurants = [
     {
@@ -35,21 +36,22 @@ const RestaurantDetailsPage = () => {
       },
       openingHours: {
         weekdays: "10:00 AM - 10:00 PM",
-        weekends: "11:00 AM - 11:00 PM",
+        weekends: "11:00 AM - 11:00 PM"
       },
       contact: {
         phone: "+977 1234567890",
         email: "info@chipsy.com",
-        address: "123 Old-Baneshwor, Kathmandu",
+        address: "123 Old-Baneshwor, Kathmandu"
       },
       features: ["Outdoor Seating", "Wheelchair Accessible", "Parking Available"],
       menu: {
         popular: [
           { name: "Momos", price: "250" },
-          { name: "Thukpa", price: "300" },
-        ],
-      },
+          { name: "Thukpa", price: "300" }
+        ]
+      }
     },
+    // ... other restaurants
   ];
 
   const restaurant = restaurants.find((r) => r.id === id);
@@ -64,20 +66,62 @@ const RestaurantDetailsPage = () => {
     );
   }
 
-  const handleReservationSubmit = (e) => {
-    e.preventDefault();
-    setShowPopup(true);
+  const allPhotos = [
+    ...restaurant.photos.interior,
+    ...restaurant.photos.food,
+    ...restaurant.photos.ambiance
+  ];
+
+  const handleImageNavigation = (direction) => {
+    const newIndex = direction === 'next'
+      ? (currentImageIndex + 1) % allPhotos.length
+      : (currentImageIndex - 1 + allPhotos.length) % allPhotos.length;
+    setCurrentImageIndex(newIndex);
+    setSelectedImage(allPhotos[newIndex]);
   };
 
-  const confirmPayment = () => {
-    setShowPopup(false);
-    alert("Payment confirmed! Table booked successfully.");
+  const handleReservationChange = (e) => {
+    const { name, value } = e.target;
+    setReservationData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleReservationSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    
+    try {
+      // API call
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      setNotification({
+        type: "success",
+        message: "Reservation submitted successfully! We'll confirm shortly."
+      });
+      
+      // Reset form
+      setReservationData({
+        date: "",
+        time: "",
+        guests: 1,
+        specialRequests: ""
+      });
+    } catch (error) {
+      setNotification({
+        type: "error",
+        message: "Failed to submit reservation. Please try again."
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <div className="min-h-screen p-4 bg-gray-100 md:p-6">
       <div className="mx-auto overflow-hidden bg-white rounded-lg shadow-md max-w-7xl">
-        {/* Keep everything as it is */}
+        
         <div className="relative h-96">
           <img
             src={restaurant.mainImage}
@@ -112,30 +156,22 @@ const RestaurantDetailsPage = () => {
               <div className="p-6 bg-white rounded-lg shadow-sm">
                 <h2 className="mb-4 text-2xl font-bold">About</h2>
                 <p className="text-gray-700">{restaurant.description}</p>
-
+                
                 <div className="grid grid-cols-2 gap-4 mt-6">
                   <div className="flex items-center">
                     <Clock className="w-5 h-5 mr-2 text-gray-500" />
                     <div>
                       <p className="font-semibold">Opening Hours</p>
-                      <p className="text-sm text-gray-600">
-                        Weekdays: {restaurant.openingHours.weekdays}
-                      </p>
-                      <p className="text-sm text-gray-600">
-                        Weekends: {restaurant.openingHours.weekends}
-                      </p>
+                      <p className="text-sm text-gray-600">Weekdays: {restaurant.openingHours.weekdays}</p>
+                      <p className="text-sm text-gray-600">Weekends: {restaurant.openingHours.weekends}</p>
                     </div>
                   </div>
                   <div className="flex items-center">
                     <Phone className="w-5 h-5 mr-2 text-gray-500" />
                     <div>
                       <p className="font-semibold">Contact</p>
-                      <p className="text-sm text-gray-600">
-                        {restaurant.contact.phone}
-                      </p>
-                      <p className="text-sm text-gray-600">
-                        {restaurant.contact.email}
-                      </p>
+                      <p className="text-sm text-gray-600">{restaurant.contact.phone}</p>
+                      <p className="text-sm text-gray-600">{restaurant.contact.email}</p>
                     </div>
                   </div>
                 </div>
@@ -145,24 +181,22 @@ const RestaurantDetailsPage = () => {
               <div>
                 <h2 className="mb-6 text-2xl font-bold">Photo Gallery</h2>
                 <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
-                  {restaurant.photos.interior.concat(restaurant.photos.food, restaurant.photos.ambiance).map(
-                    (photo, index) => (
-                      <div
-                        key={index}
-                        className="relative overflow-hidden rounded-lg cursor-pointer aspect-square group"
-                        onClick={() => {
-                          setSelectedImage(photo);
-                          setCurrentImageIndex(index);
-                        }}
-                      >
-                        <img
-                          src={photo}
-                          alt={`Gallery ${index + 1}`}
-                          className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-110"
-                        />
-                      </div>
-                    )
-                  )}
+                  {allPhotos.map((photo, index) => (
+                    <div 
+                      key={index}
+                      className="relative overflow-hidden rounded-lg cursor-pointer aspect-square group"
+                      onClick={() => {
+                        setSelectedImage(photo);
+                        setCurrentImageIndex(index);
+                      }}
+                    >
+                      <img
+                        src={photo}
+                        alt={`Gallery ${index + 1}`}
+                        className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-110"
+                      />
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
@@ -174,10 +208,7 @@ const RestaurantDetailsPage = () => {
                 <h2 className="mb-4 text-2xl font-bold">Popular Items</h2>
                 <div className="space-y-4">
                   {restaurant.menu.popular.map((item, index) => (
-                    <div
-                      key={index}
-                      className="flex justify-between p-4 transition-colors rounded-lg bg-gray-50 hover:bg-gray-100"
-                    >
+                    <div key={index} className="flex justify-between p-4 transition-colors rounded-lg bg-gray-50 hover:bg-gray-100">
                       <span className="font-medium">{item.name}</span>
                       <span className="text-gray-600">NRS {item.price}</span>
                     </div>
@@ -188,12 +219,23 @@ const RestaurantDetailsPage = () => {
               {/* Reservation Form */}
               <div className="p-6 bg-white rounded-lg shadow-sm">
                 <h2 className="mb-6 text-2xl font-bold">Book a Table</h2>
+                {notification && (
+                  <div className={`p-4 mb-4 rounded-lg ${
+                    notification.type === "success" 
+                      ? "bg-green-100 text-green-700" 
+                      : "bg-red-100 text-red-700"
+                  }`}>
+                    {notification.message}
+                  </div>
+                )}
                 <form onSubmit={handleReservationSubmit} className="space-y-4">
                   <div>
                     <label className="block mb-1 text-gray-700">Date</label>
                     <input
                       type="date"
                       name="date"
+                      value={reservationData.date}
+                      onChange={handleReservationChange}
                       className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
                       required
                     />
@@ -203,6 +245,8 @@ const RestaurantDetailsPage = () => {
                     <input
                       type="time"
                       name="time"
+                      value={reservationData.time}
+                      onChange={handleReservationChange}
                       className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
                       required
                     />
@@ -213,12 +257,24 @@ const RestaurantDetailsPage = () => {
                       type="number"
                       name="guests"
                       min="1"
+                      value={reservationData.guests}
+                      onChange={handleReservationChange}
                       className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
                       required
                     />
                   </div>
-                  <button
-                    type="submit"
+                  <div>
+                    <label className="block mb-1 text-gray-700">Special Requests</label>
+                    <textarea
+                      name="specialRequests"
+                      value={reservationData.specialRequests}
+                      onChange={handleReservationChange}
+                      rows="3"
+                      className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                    />
+                  </div>
+                  <button 
+                    type="submit" 
                     className="w-full px-4 py-2 mt-4 text-white bg-blue-600 rounded-lg focus:outline-none hover:bg-blue-700"
                     disabled={loading}
                   >
@@ -229,30 +285,6 @@ const RestaurantDetailsPage = () => {
             </div>
           </div>
         </div>
-
-        {/* Pop-up Confirmation Box */}
-        {showPopup && (
-          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-            <div className="p-6 bg-white rounded-lg shadow-lg w-96">
-              <h2 className="mb-4 text-xl font-semibold">Confirm Your Reservation</h2>
-              <p className="mb-4 text-gray-700">A reservation fee of Rs. 500 is required.</p>
-              <div className="flex justify-end space-x-4">
-                <button
-                  onClick={() => setShowPopup(false)}
-                  className="px-4 py-2 text-gray-700 bg-gray-200 rounded-lg hover:bg-gray-300"
-                >
-                  Cancel
-                </button>
-                <button
-                  onClick={confirmPayment}
-                  className="px-4 py-2 text-white bg-green-600 rounded-lg hover:bg-green-700"
-                >
-                  Pay & Confirm
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
       </div>
     </div>
   );
