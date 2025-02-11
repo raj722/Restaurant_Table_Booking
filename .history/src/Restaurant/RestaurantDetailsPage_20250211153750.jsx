@@ -146,7 +146,22 @@ const RestaurantDetailsPage = () => {
 
             {/* Right Column */}
             <div className="space-y-8">
-          
+              {/* Popular Items */}
+              <div className="p-6 bg-white rounded-lg shadow-sm">
+                <h2 className="mb-4 text-2xl font-bold">Popular Items</h2>
+                <div className="space-y-4">
+                  {restaurant.menu.popular.map((item, index) => (
+                    <div
+                      key={index}
+                      className="flex justify-between p-4 transition-colors rounded-lg bg-gray-50 hover:bg-gray-100"
+                    >
+                      <span className="font-medium">{item.name}</span>
+                      <span className="text-gray-600">NRS {item.price}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
               {/* Reservation Form */}
               <div className="p-6 bg-white rounded-lg shadow-sm">
                 <h2 className="mb-6 text-2xl font-bold">Book a Table</h2>

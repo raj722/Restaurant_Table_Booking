@@ -9,6 +9,7 @@ import {
   Clock,
   CreditCard,
   Menu,
+  
 } from "lucide-react";
 
 const Sidebar = () => {
@@ -21,11 +22,7 @@ const Sidebar = () => {
   return (
     <div className="flex min-h-screen bg-gray-100">
       {/* Sidebar */}
-      <div
-        className={`bg-gray-700 text-white fixed top-0 left-0 h-full transition-all duration-300 ${
-          isOpen ? "w-64" : "w-20"
-        }`}
-      >
+      <div className={`bg-gray-700 text-white h-screen transition-all duration-300 ${isOpen ? "w-64" : "w-20"}`}>
         <div className="flex items-center justify-between p-4">
           <h1 className={`text-lg font-bold ${isOpen ? "block" : "hidden"}`}>Admin Panel</h1>
           <button onClick={toggleSidebar} className="text-white focus:outline-none">
@@ -42,10 +39,11 @@ const Sidebar = () => {
             <SidebarItem icon={<Clock />} text="Time Slots" link="/admin/timeslots" isOpen={isOpen} />
             <SidebarItem icon={<CreditCard />} text="Payments" link="/admin/payments" isOpen={isOpen} />
           </ul>
+          
         </nav>
       </div>
       {/* Main Content Area */}
-      <div className="flex-1 p-6 ml-64"> {/* Adjusted margin-left to account for sidebar */}
+      <div className="flex-1 p-6">
         <h1 className="text-3xl font-bold">Admin Dashboard</h1>
         {/* Dashboard Metrics Section */}
         <div className="grid grid-cols-1 gap-6 mb-8 md:grid-cols-3">

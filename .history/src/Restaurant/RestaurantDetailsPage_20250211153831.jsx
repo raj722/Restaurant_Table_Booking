@@ -146,7 +146,9 @@ const RestaurantDetailsPage = () => {
 
             {/* Right Column */}
             <div className="space-y-8">
-          
+              {/* Popular Items */}
+              
+
               {/* Reservation Form */}
               <div className="p-6 bg-white rounded-lg shadow-sm">
                 <h2 className="mb-6 text-2xl font-bold">Book a Table</h2>

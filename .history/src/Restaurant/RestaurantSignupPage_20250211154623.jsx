@@ -110,7 +110,7 @@ const RestaurantSignupPage = () => {
               id="password"
               value={formData.password}
               onChange={handleInputChange}
-              placeholder="********"
+              placeholder="••••••••"
               className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 bg-white/90"
               required
             />
@@ -123,7 +123,7 @@ const RestaurantSignupPage = () => {
               id="confirmPassword"
               value={formData.confirmPassword}
               onChange={handleInputChange}
-              placeholder="********"
+              placeholder="••••••••"
               className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 bg-white/90"
               required
             />
@@ -140,14 +140,14 @@ const RestaurantSignupPage = () => {
 
         <div className="mt-6 space-y-4 text-center">
           <p className="text-gray-600">
-            Want to Order food instead?{' '}
+            Want to order food instead?{' '}
             <Link to="/signup" className="text-blue-500 hover:underline">
               Sign up as Customer
             </Link>
           </p>
 
           <p className="text-sm text-gray-600">
-            Already have a Restaurant account?{' '}
+            Already have a restaurant account?{' '}
             <Link to="/restaurant-login" className="text-blue-500 hover:underline">
               Login
             </Link>

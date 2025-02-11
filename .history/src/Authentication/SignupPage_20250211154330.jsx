@@ -1,15 +1,13 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-const RestaurantSignupPage = () => {
-  const navigate = useNavigate();
-
+const SignupPage = () => {
   const [formData, setFormData] = useState({
-    name: '',
+    username: '',
     email: '',
+    phone_no: '',
     password: '',
     confirmPassword: '',
-    contact_number: '',
   });
 
   const [error, setError] = useState('');
@@ -37,16 +35,29 @@ const RestaurantSignupPage = () => {
     }
 
     try {
-      // Simulated API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      // Mock successful registration
-      setSuccess('Restaurant owner account created successfully!');
+      const response = await fetch('https://your-backend-api.com/signup/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          username: formData.username,
+          email: formData.email,
+          phone_no: formData.phone_no,
+          password: formData.password,
+          role: 'customer',
+        }),
+      });
+
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.message || 'Signup failed');
+      }
+
+      setSuccess('Account created successfully!');
       setTimeout(() => {
-        navigate('/restaurant-login');
+        window.location.href = '/login';
       }, 2000);
     } catch (err) {
-      setError('An error occurred. Please try again.');
+      setError(err.message);
     } finally {
       setIsLoading(false);
     }
@@ -58,20 +69,20 @@ const RestaurantSignupPage = () => {
       style={{ backgroundImage: "url('/images/background.png')" }}
     >
       <div className="w-full max-w-md p-8 bg-gray-300 rounded-lg shadow-lg backdrop-blur-sm">
-        <h2 className="mb-6 text-2xl font-bold text-center text-gray-800">Restaurant Owner Registration</h2>
+        <h2 className="mb-6 text-2xl font-bold text-center text-gray-800">Create Account</h2>
 
         {error && <p className="mb-4 text-red-600">{error}</p>}
         {success && <p className="mb-4 text-green-600">{success}</p>}
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block mb-2 text-gray-700">Restaurant Name</label>
+            <label className="block mb-2 text-gray-700">Username</label>
             <input
               type="text"
-              id="name"
-              value={formData.name}
+              id="username"
+              value={formData.username}
               onChange={handleInputChange}
-              placeholder="Restaurant Name"
+              placeholder="Enter username"
               className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 bg-white/90"
               required
             />
@@ -84,20 +95,20 @@ const RestaurantSignupPage = () => {
               id="email"
               value={formData.email}
               onChange={handleInputChange}
-              placeholder="restaurant@example.com"
+              placeholder="username@example.com"
               className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 bg-white/90"
               required
             />
           </div>
 
           <div>
-            <label className="block mb-2 text-gray-700">Contact Number</label>
+            <label className="block mb-2 text-gray-700">Phone Number</label>
             <input
               type="tel"
-              id="contact_number"
-              value={formData.contact_number}
+              id="phone_no"
+              value={formData.phone_no}
               onChange={handleInputChange}
-              placeholder="Enter Contact Number"
+              placeholder="(+977)"
               className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 bg-white/90"
               required
             />
@@ -110,7 +121,7 @@ const RestaurantSignupPage = () => {
               id="password"
               value={formData.password}
               onChange={handleInputChange}
-              placeholder="********"
+              placeholder="••••••••"
               className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 bg-white/90"
               required
             />
@@ -123,7 +134,7 @@ const RestaurantSignupPage = () => {
               id="confirmPassword"
               value={formData.confirmPassword}
               onChange={handleInputChange}
-              placeholder="********"
+              placeholder="••••••••"
               className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 bg-white/90"
               required
             />
@@ -134,21 +145,21 @@ const RestaurantSignupPage = () => {
             disabled={isLoading}
             className="w-full py-3 text-white transition-colors bg-blue-500 rounded-lg hover:bg-blue-600 disabled:bg-blue-300 disabled:cursor-not-allowed"
           >
-            {isLoading ? 'Creating Account...' : 'Register as Restaurant Owner'}
+            {isLoading ? 'Creating Account...' : 'Sign Up'}
           </button>
         </form>
 
         <div className="mt-6 space-y-4 text-center">
           <p className="text-gray-600">
-            Want to Order food instead?{' '}
-            <Link to="/signup" className="text-blue-500 hover:underline">
-              Sign up as Customer
+            Are you a restaurant owner?{' '}
+            <Link to="/restaurant-signup" className="text-blue-500 hover:underline">
+              Sign up here
             </Link>
           </p>
 
           <p className="text-sm text-gray-600">
-            Already have a Restaurant account?{' '}
-            <Link to="/restaurant-login" className="text-blue-500 hover:underline">
+            Already have an account?{' '}
+            <Link to="/login" className="text-blue-500 hover:underline">
               Login
             </Link>
           </p>
@@ -158,4 +169,4 @@ const RestaurantSignupPage = () => {
   );
 };
 
-export default RestaurantSignupPage;
+export default SignupPage;

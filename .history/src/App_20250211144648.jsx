@@ -23,7 +23,6 @@ import Customers from "./Admin/Customers";
 import Payments from "./Admin/Payments";
 import Reservations from './Admin/Reservations';
 import Tables from "./Admin/Tables";
-import TimeSlots from "./Admin/TimeSlots";
 
 function App() {
   return (
@@ -52,7 +51,6 @@ function App() {
         <Route path="/admin/payments" element={<Payments />} />
         <Route path="/admin/reservations" element={<Reservations />} />
         <Route path="/admin/tables" element={<Tables />} />
-        <Route path="/admin/timeslots" element={<TimeSlots />} />
 
         
       </Routes>

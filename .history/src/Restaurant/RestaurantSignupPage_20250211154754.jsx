@@ -147,7 +147,7 @@ const RestaurantSignupPage = () => {
           </p>
 
           <p className="text-sm text-gray-600">
-            Already have a Restaurant account?{' '}
+            Already have a Restaurant Account?{' '}
             <Link to="/restaurant-login" className="text-blue-500 hover:underline">
               Login
             </Link>

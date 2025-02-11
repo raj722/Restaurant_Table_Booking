@@ -140,14 +140,14 @@ const RestaurantSignupPage = () => {
 
         <div className="mt-6 space-y-4 text-center">
           <p className="text-gray-600">
-            Want to Order food instead?{' '}
+            Want to order food instead?{' '}
             <Link to="/signup" className="text-blue-500 hover:underline">
               Sign up as Customer
             </Link>
           </p>
 
           <p className="text-sm text-gray-600">
-            Already have a Restaurant account?{' '}
+            Already have a restaurant account?{' '}
             <Link to="/restaurant-login" className="text-blue-500 hover:underline">
               Login
             </Link>

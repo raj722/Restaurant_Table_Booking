@@ -19,11 +19,7 @@ import CustomerDetails from "./Restaurant/CustomerDetails";
 import RestaurantSignupPage from "./Restaurant/RestaurantSignupPage";
 import RestaurantLoginPage from "./Restaurant/RestaurantLoginPage";
 import Restaurants from "./Admin/Restaurants";
-import Customers from "./Admin/Customers";
-import Payments from "./Admin/Payments";
-import Reservations from './Admin/Reservations';
-import Tables from "./Admin/Tables";
-import TimeSlots from "./Admin/TimeSlots";
+
 
 function App() {
   return (
@@ -47,13 +43,6 @@ function App() {
         <Route path="/restaurant/customer-details/:customerId" element={<CustomerDetails />} />
         <Route path="/restaurant-signup" element={<RestaurantSignupPage />} />
         <Route path="/restaurant-login" element={<RestaurantLoginPage />} />
-        <Route path="/admin/restaurants" element={<Restaurants />} />
-        <Route path="/admin/customers" element={<Customers />} />
-        <Route path="/admin/payments" element={<Payments />} />
-        <Route path="/admin/reservations" element={<Reservations />} />
-        <Route path="/admin/tables" element={<Tables />} />
-        <Route path="/admin/timeslots" element={<TimeSlots />} />
-
         
       </Routes>
       <Footer />
